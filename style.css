@@ -1,0 +1,43 @@
+h1 {
+	text-align: center;
+	width: 448px;
+}
+.button, .spacehack {
+	display: block;
+	float: left;
+	height: 60px;
+	margin: 5px;
+	padding: 20px;
+	width: 60px;
+}
+.button {
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	border-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+.clear {
+	clear:both;
+}
+#left {
+	float: left;
+	height: 336px;
+	width: 336px;
+}
+#right {
+	float: left;
+	height: 336px;
+	width: 112px;
+}
+div.inactive {
+	background-color: #c40f0f;
+	border: 1px solid #c40f0f;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+}
+div.active {
+	background-color: #093;
+	border: 1px solid #093;
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+}
