@@ -7,34 +7,25 @@ var fs   = require('fs'),
 	url  = require('url'),
 	port = process.argv[2] || 8080;
 
+mime = {
+	'css': 'text/css', 
+	'html':'text/html', 
+	'js':  'text/javascript'
+}
+
 var server = http.createServer(function(req, res) {
-	
-	var uri      = url.parse(req.url).pathname,
-	    filename = path.join(process.cwd(), uri);
+	file = req.url.slice(1)||'index.html';
 
-	path.exists(filename, function(exists) {
-
-		if(!exists) {
-			res.writeHead(404, {'Content-Type': 'text/html'});
-			res.write("404 Not Found\n");
-			res.end();
-			return;
+	fs.readFile(file, function(err, data){
+		if (err){
+			res.writeHead(404);
+			res.end('404: Not Found');
+			console.log('Error reading [' + file + ']');
+		} else {
+			res.writeHead(200, {'Content-Type':
+				mime[file.slice(file.lastIndexOf('.')+1)]});
+			res.end(data);
 		}
-
-		if (fs.statSync(filename).isDirectory()) filename += '/index.html';
-
-		fs.readFile(filename, "binary", function(err, file) {
-			if(err) {
-				res.writeHead(500, {'Content-Type': 'text/html'});
-				res.write(err + "\n");
-				res.end();
-				return;
-			}
-
-		res.writeHead(200);
-		res.write(file, "binary");
-		res.end();
-		});
 	});
 });
 server.listen(parseInt(port,10));
